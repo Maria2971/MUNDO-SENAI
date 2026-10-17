@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17479e">
+<title>Guia Rápido de Hardware — Mundo SENAI 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#17479e;--blue2:#0d2e68;--orange:#f04b16;--ink:#18243a;--muted:#58677d;--paper:#f7f9fc;--line:#dce4ef;--white:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:"Libre Baskerville",Georgia,serif;background:var(--paper);color:var(--ink)}
+button{font:inherit}
+.deck{height:100dvh;width:100%;position:relative;overflow:hidden;background:linear-gradient(135deg,#fff 0%,#f4f7fc 100%)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:clamp(22px,4vw,58px) clamp(24px,6vw,88px) 82px;opacity:0;visibility:hidden;transform:translateX(32px) scale(.99);transition:opacity .42s ease,transform .48s ease,visibility .42s;overflow:auto}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0) scale(1);z-index:2}
+.slide.leaving-left{transform:translateX(-35px);opacity:0}
+.slide:before{content:"";position:absolute;top:-100px;right:-80px;width:310px;height:310px;border:1px solid #d9e4f5;border-radius:50%;pointer-events:none}
+.slide:after{content:"";position:absolute;top:36px;right:42px;width:9px;height:90px;background:var(--orange);transform:skew(-22deg);opacity:.85;pointer-events:none}
+.topline{display:flex;align-items:center;gap:10px;color:var(--blue);font-size:clamp(11px,1vw,14px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:clamp(16px,3vh,30px)}
+.topline:before{content:"";display:block;width:28px;height:4px;background:var(--orange)}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(34px,5.5vw,72px);line-height:1.12;max-width:950px;margin-bottom:22px;color:var(--blue2)}
+h2{font-size:clamp(28px,3.6vw,48px);line-height:1.18;color:var(--blue2);max-width:1050px;margin-bottom:clamp(18px,3vh,28px)}
+h3{font-size:clamp(17px,1.65vw,23px);line-height:1.35;color:var(--blue);margin-bottom:10px}
+p,li{font-size:clamp(16px,1.5vw,21px);line-height:1.55}
+.lead{font-size:clamp(19px,2vw,28px);line-height:1.55;max-width:850px;color:#36465e}
+.small{font-size:clamp(12px,1vw,15px);color:var(--muted);line-height:1.5}
+.accent{color:var(--orange)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,24px);max-width:1150px}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panel{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:18px;padding:clamp(17px,2vw,26px);box-shadow:0 8px 24px rgba(23,71,158,.055);position:relative;overflow:hidden}
+.panel:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
+.panel p:last-child{margin-bottom:0}
+.pill{display:inline-block;background:#eaf0fb;color:var(--blue);padding:7px 11px;border-radius:99px;font-size:13px;font-weight:bold;margin:0 6px 8px 0}
+.callout{border-left:5px solid var(--orange);background:#fff5f0;padding:15px 20px;border-radius:0 12px 12px 0;max-width:1000px}
+.flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;max-width:1100px}
+.flow div{flex:1 1 130px;text-align:center;padding:18px 12px;border:1px solid var(--line);background:#fff;border-radius:14px;font-size:clamp(14px,1.3vw,18px);line-height:1.45}
+.flow b{display:block;color:var(--blue);margin-bottom:6px}
+.flow .arrow{flex:0 0 auto;align-self:center;border:0;background:none;color:var(--orange);font-size:28px;padding:0}
+.quiz{max-width:950px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(18px,2.5vw,30px);box-shadow:0 10px 28px rgba(23,71,158,.07)}
+.quiz .options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.option{border:1px solid #ccd8e8;border-radius:12px;padding:14px 16px;background:#fff;text-align:left;cursor:pointer;line-height:1.4;font-size:clamp(14px,1.25vw,18px);color:var(--ink)}
+.option:hover,.option:focus-visible{border-color:var(--blue);outline:2px solid #d8e5ff}
+.option.correct{background:#e9f7ef;border-color:#2f8b57}.option.wrong{background:#fff0eb;border-color:var(--orange)}
+.feedback{font-size:16px;line-height:1.5;min-height:24px;color:var(--blue2)}
+.reveal{border:0;border-radius:10px;background:var(--blue);color:#fff;padding:11px 16px;cursor:pointer;font-size:14px}
+.reveal:hover{background:var(--blue2)}
+.cover{justify-content:center}
+.cover .kicker{font-size:clamp(13px,1.3vw,17px);color:var(--orange);font-weight:bold;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.cover h1{font-size:clamp(42px,7.2vw,96px);max-width:1000px}
+.cover .rule{height:7px;width:100px;background:var(--orange);margin:10px 0 28px}
+.names{max-width:950px;line-height:1.8;font-size:clamp(14px,1.35vw,18px);color:#34435a}
+.tech{position:absolute;right:7%;bottom:15%;width:clamp(110px,17vw,230px);height:clamp(110px,17vw,230px);opacity:.16;pointer-events:none}
+.tech svg{width:100%;height:100%;stroke:var(--blue);fill:none;stroke-width:2}
+.footer{position:absolute;bottom:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,58px);background:rgba(255,255,255,.94);border-top:1px solid var(--line);z-index:5;gap:15px}
+.footer-topic{font-size:clamp(10px,1vw,13px);font-weight:bold;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo{width:92px;max-height:38px;object-fit:contain}
+.controls{position:absolute;z-index:8;bottom:76px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 clamp(20px,4vw,58px);pointer-events:none}
+.navbtn,.counter{pointer-events:auto}
+.navbtn{border:1px solid #cbd7e8;background:#fff;color:var(--blue);border-radius:999px;padding:10px 17px;cursor:pointer;box-shadow:0 4px 14px #173e7b12;font-size:14px}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.navbtn.next{background:var(--blue);color:#fff;border-color:var(--blue)}
+.counter{font-size:13px;color:var(--muted);background:#fff;padding:8px 12px;border-radius:99px;border:1px solid var(--line)}
+.progress{position:absolute;z-index:9;top:0;left:0;height:5px;background:var(--orange);width:0;transition:width .3s}
+.decor{position:absolute;bottom:90px;right:5%;display:flex;gap:8px;opacity:.35;pointer-events:none}
+.decor span{width:8px;height:8px;background:var(--orange);transform:skew(-25deg)}
+.footer .footer-right{display:flex;align-items:center;gap:14px}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(2deg)}}
+.active .topline,.active h1,.active h2,.active .lead,.active .grid,.active .flow,.active .quiz,.active .callout,.active .names{animation:rise .55s both}
+.active h1,.active h2{animation-delay:.06s}.active .grid,.active .flow,.active .quiz{animation-delay:.13s}
+.active .tech{animation:drift 5s ease-in-out infinite}
+@media(max-width:760px){
+ .slide{padding:25px 22px 100px}.grid,.grid.three{grid-template-columns:1fr}.slide:after{right:22px;height:60px}.tech{right:7%;bottom:17%;width:100px;height:100px;opacity:.09}
+ .controls{bottom:70px;padding:0 14px}.navbtn{padding:9px 12px;font-size:12px}.counter{font-size:11px;padding:7px}
+ .footer{height:55px;padding:0 16px}.logo{width:70px}.quiz .options{grid-template-columns:1fr}
+ .flow .arrow{display:none}.flow div{flex-basis:40%}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media print{html,body{height:auto;overflow:visible}.slide{position:relative;opacity:1;visibility:visible;transform:none;page-break-after:always;min-height:100vh}.controls,.progress{display:none}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+<div class="progress" id="progress"></div>
+<main id="slides">
+<section class="slide active cover" data-topic="Apresentação">
+<div class="topline">Mundo SENAI 2026 · Informática para Internet</div>
+<div class="kicker">Conheça as peças. Entenda o sistema.</div>
+<h1>Guia Rápido de <span class="accent">Hardware</span></h1>
+<div class="rule"></div>
+<p class="lead">Uma visão prática dos componentes que fazem o computador funcionar.</p>
+<p class="names"><strong>Integrantes:</strong> Otávio, Samuel, Maria, Marina, Gabriel Victor, Augusto e Davi Casteliano<br><strong>Turma:</strong> <span contenteditable="true" aria-label="Editar turma">Clique para preencher</span> &nbsp; · &nbsp; <strong>Data:</strong> <span contenteditable="true" aria-label="Editar data">Clique para preencher</span></p>
+<div class="tech" aria-hidden="true"><svg viewBox="0 0 160 160"><rect x="30" y="30" width="100" height="100" rx="8"/><rect x="49" y="49" width="62" height="62" rx="4"/><path d="M48 10v20M70 10v20M92 10v20M114 10v20M48 130v20M70 130v20M92 130v20M114 130v20M10 48h20M10 70h20M10 92h20M10 114h20M130 48h20M130 70h20M130 92h20M130 114h20"/></svg></div>
+</section>
+<section class="slide" data-topic="O que é hardware?">
+<div class="topline">01 · Conceito básico</div><h2>O que é <span class="accent">hardware</span>?</h2>
+<div class="grid">
+<div class="panel"><h3>Hardware</h3><p>É a parte física do computador: os componentes e dispositivos que podem ser tocados.</p><p><span class="pill">Teclado</span><span class="pill">Monitor</span><span class="pill">Processador</span><span class="pill">Placa-mãe</span></p></div>
+<div class="panel"><h3>Software</h3><p>É o conjunto de programas e instruções executados pelo computador.</p><p><span class="pill">Windows</span><span class="pill">Navegador</span><span class="pill">Jogos</span></p></div>
+</div>
+<div class="callout" style="margin-top:22px"><strong>Em resumo:</strong> hardware é a parte física; software é a parte lógica.</div>
+<div class="quiz" data-answer="1" data-explain="O teclado é um componente físico, portanto é hardware." style="margin-top:20px"><h3>Interação rápida</h3><p>O teclado é hardware ou software?</p><div class="options"><button class="option">A · Software</button><button class="option">B · Hardware</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Placa-mãe e processador">
+<div class="topline">02 · Componentes principais</div><h2>Placa-mãe e <span class="accent">processador</span></h2>
+<div class="grid">
+<div class="panel"><h3>Placa-mãe</h3><p>Conecta os componentes e permite a comunicação entre eles.</p><p class="small">Possui encaixes para CPU, memória RAM e placas de expansão.</p></div>
+<div class="panel"><h3>Processador (CPU)</h3><p>Executa instruções, cálculos e operações dos programas.</p><p class="small">É frequentemente comparado ao cérebro do computador.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">Na demonstração, identifique o soquete da CPU e os slots da memória RAM.</div>
+<div class="quiz" data-answer="0" data-explain="A placa-mãe conecta os componentes e permite que se comuniquem." style="margin-top:18px"><h3>Qual é a função principal da placa-mãe?</h3><div class="options"><button class="option">A · Conectar os componentes</button><button class="option">B · Exibir imagens no monitor</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Memória RAM e armazenamento">
+<div class="topline">03 · Memória e arquivos</div><h2>Memória RAM e <span class="accent">armazenamento</span></h2>
+<div class="grid">
+<div class="panel"><h3>Memória RAM</h3><p>Guarda temporariamente os dados e programas em uso.</p><p class="small">É volátil: perde os dados armazenados quando o computador é desligado.</p></div>
+<div class="panel"><h3>SSD e HD</h3><p>Guardam arquivos, programas e o sistema operacional mesmo quando o computador está desligado.</p><p class="small">O SSD geralmente é mais rápido que um HD tradicional.</p></div>
+</div>
+<div class="callout" style="margin-top:22px"><strong>Não confundir:</strong> RAM é espaço de trabalho temporário; SSD e HD são armazenamento.</div>
+<div class="quiz" data-answer="1" data-explain="A RAM é uma memória volátil e perde os dados quando fica sem alimentação." style="margin-top:18px"><h3>Qual memória perde os dados ao desligar?</h3><div class="options"><button class="option">A · SSD</button><button class="option">B · RAM</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Energia, vídeo e refrigeração">
+<div class="topline">04 · Energia e temperatura</div><h2>Energia, vídeo e <span class="accent">refrigeração</span></h2>
+<div class="grid three">
+<div class="panel"><h3>Fonte</h3><p>Converte e distribui energia adequada aos componentes.</p></div>
+<div class="panel"><h3>Placa de vídeo (GPU)</h3><p>Processa gráficos e imagens; pode ser integrada ou dedicada.</p></div>
+<div class="panel"><h3>Refrigeração e gabinete</h3><p>Coolers e ventoinhas ajudam a controlar o calor. O gabinete abriga e protege as peças.</p></div>
+</div>
+<div class="quiz" data-answer="0" data-explain="A fonte fornece energia elétrica adequada aos componentes do computador." style="margin-top:22px"><h3>Qual componente fornece energia às peças?</h3><div class="options"><button class="option">A · Fonte de alimentação</button><button class="option">B · Memória RAM</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Periféricos e conexões">
+<div class="topline">05 · Entrada e saída</div><h2>Periféricos e <span class="accent">conexões</span></h2>
+<div class="grid">
+<div class="panel"><h3>Entrada</h3><p>Enviam dados ou comandos ao computador: teclado, mouse e microfone.</p></div>
+<div class="panel"><h3>Saída</h3><p>Apresentam informações: monitor, caixas de som e impressora.</p></div>
+<div class="panel"><h3>Entrada e saída</h3><p>Alguns dispositivos, como telas sensíveis ao toque, fazem as duas funções.</p></div>
+<div class="panel"><h3>Conexões comuns</h3><p>USB, HDMI, Ethernet e conectores de áudio.</p></div>
+</div>
+<div class="quiz" data-answer="1" data-explain="O monitor é um dispositivo de saída porque apresenta informações ao usuário." style="margin-top:18px"><h3>Qual é um dispositivo de saída?</h3><div class="options"><button class="option">A · Teclado</button><button class="option">B · Monitor</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Como tudo funciona junto">
+<div class="topline">06 · Sistema integrado</div><h2>Como tudo funciona <span class="accent">junto</span>?</h2>
+<p class="lead">Ao abrir um jogo, diferentes componentes trabalham em conjunto.</p>
+<div class="flow">
+<div><b>SSD / HD</b>Os arquivos do jogo ficam armazenados.</div><div class="arrow">→</div>
+<div><b>RAM</b>Os dados necessários ficam disponíveis temporariamente.</div><div class="arrow">→</div>
+<div><b>CPU + GPU</b>Executam instruções e processam os gráficos.</div><div class="arrow">→</div>
+<div><b>Monitor</b>Exibe o resultado.</div>
+</div>
+<p class="small" style="margin-top:18px">A placa-mãe conecta os componentes; a fonte fornece energia para o sistema.</p>
+<div class="quiz" data-answer="0" data-explain="O SSD ou HD guarda os arquivos; a RAM mantém temporariamente os dados em uso." style="margin-top:18px"><h3>Onde os arquivos ficam guardados mesmo após desligar?</h3><div class="options"><button class="option">A · SSD ou HD</button><button class="option">B · Somente na RAM</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Cuidados e compatibilidade">
+<div class="topline">07 · Segurança e montagem</div><h2>Cuidados e <span class="accent">compatibilidade</span></h2>
+<div class="grid">
+<div class="panel"><h3>Antes de montar</h3><ul><li>Conferir a compatibilidade das peças.</li><li>Desligar e desconectar da energia.</li><li>Reduzir riscos de eletricidade estática.</li></ul></div>
+<div class="panel"><h3>Durante a montagem</h3><ul><li>Segurar placas pelas bordas.</li><li>Não forçar encaixes.</li><li>Seguir os manuais dos fabricantes.</li><li>Nunca abrir a fonte de alimentação.</li></ul></div>
+</div>
+<div class="quiz" data-answer="1" data-explain="Se uma peça não encaixar, pare e confira a posição, o modelo e as instruções. Não force." style="margin-top:18px"><h3>Uma peça não encaixa. O que fazer?</h3><div class="options"><button class="option">A · Forçar o encaixe</button><button class="option">B · Parar e conferir compatibilidade</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Montagem ao vivo">
+<div class="topline">08 · Demonstração prática</div><h2>Montagem do computador <span class="accent">ao vivo</span></h2>
+<div class="grid">
+<div class="panel"><h3>Etapas da demonstração</h3><ol><li>Identificar as peças.</li><li>Instalar CPU, cooler e RAM.</li><li>Fixar a placa-mãe no gabinete.</li><li>Instalar fonte e armazenamento.</li><li>Conectar os cabos.</li><li>Instalar GPU, se houver.</li><li>Conferir tudo antes do teste.</li></ol></div>
+<div class="panel"><h3>O que observar</h3><p>Encaixes, conectores, organização dos cabos e função de cada componente.</p><div class="callout" style="margin-top:14px"><strong>Segurança:</strong> montagem com o equipamento desconectado da energia e sob supervisão.</div></div>
+</div>
+<div class="quiz" data-answer="0" data-explain="A montagem deve ocorrer com o equipamento desconectado da energia; a alimentação só deve ser conectada após a conferência." style="margin-top:18px"><h3>Durante a montagem, o computador deve estar:</h3><div class="options"><button class="option">A · Desconectado da energia</button><button class="option">B · Ligado para testar encaixes</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Teste e problemas comuns">
+<div class="topline">09 · Verificação inicial</div><h2>Teste e problemas <span class="accent">comuns</span></h2>
+<div class="grid">
+<div class="panel"><h3>Não liga</h3><p>Verificar cabo de energia, fonte e conexões.</p></div>
+<div class="panel"><h3>Não dá imagem</h3><p>Verificar monitor, cabo e componentes de vídeo.</p></div>
+<div class="panel"><h3>Está lento</h3><p>RAM, armazenamento, programas e outros fatores podem influenciar.</p></div>
+<div class="panel"><h3>Esquenta muito</h3><p>Verificar refrigeração e circulação de ar.</p></div>
+</div>
+<p class="small" style="margin-top:15px">São causas possíveis, não diagnósticos definitivos. A verificação deve ser feita com segurança.</p>
+<div class="quiz" data-answer="1" data-explain="O superaquecimento pode estar relacionado à refrigeração ou ao fluxo de ar, entre outras causas." style="margin-top:14px"><h3>Qual problema pode estar ligado à refrigeração?</h3><div class="options"><button class="option">A · Teclado sem iluminação</button><button class="option">B · Temperatura excessiva</button></div><div class="feedback" aria-live="polite"></div></div>
+</section>
+<section class="slide" data-topic="Quiz valendo brinde">
+<div class="topline">10 · Desafio da turma</div><h2>Quiz de hardware <span class="accent">valendo brinde</span></h2>
+<p class="lead">Escolha uma resposta. Depois, confira se acertou!</p>
+<div class="quiz" data-answer="1" data-explain="A CPU executa instruções e operações dos programas." id="finalquiz">
+<h3>1. Qual componente executa instruções?</h3>
+<div class="options"><button class="option">A · SSD</button><button class="option">B · CPU</button><button class="option">C · Gabinete</button><button class="option">D · Teclado</button></div><div class="feedback" aria-live="polite"></div>
+</div>
+<div class="small" style="margin-top:14px">Sugestão para quem apresenta: faça as perguntas em voz alta, aguarde as respostas e revele a alternativa correta.</div>
+</section>
+<section class="slide" data-topic="Conclusão">
+<div class="topline">11 · Fechamento</div><h2>Hardware: peças diferentes, <span class="accent">um sistema</span></h2>
+<div class="grid">
+<div class="panel"><h3>Entender</h3><p>Cada componente tem uma função específica.</p></div>
+<div class="panel"><h3>Integrar</h3><p>As peças precisam ser compatíveis e trabalhar juntas.</p></div>
+<div class="panel"><h3>Aplicar</h3><p>Conhecer hardware ajuda na montagem, manutenção e identificação de problemas.</p></div>
+<div class="panel"><h3>Participar</h3><p>Observe a montagem e teste seus conhecimentos no quiz.</p></div>
+</div>
+<div class="callout" style="margin-top:22px"><strong>Obrigado pela participação!</strong> Dúvidas ou perguntas?</div>
+</section>
+</main>
+<div class="controls">
+<button class="navbtn" id="prev" aria-label="Slide anterior">← Anterior</button>
+<div class="counter" id="counter" aria-live="polite">1 / 12</div>
+<button class="navbtn next" id="next" aria-label="Próximo slide">Próximo →</button>
+</div>
+<footer class="footer"><div class="footer-topic" id="footerTopic">Apresentação</div><div class="footer-right"><span class="small">Mundo SENAI 2026</span><img class="logo" alt="Logo SENAI" src="data:image/png;base64,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"></div></footer>
+<div class="decor" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+<script>
+(() => {
+ const slides=[...document.querySelectorAll('.slide')], prev=document.getElementById('prev'), next=document.getElementById('next');
+ const counter=document.getElementById('counter'), progress=document.getElementById('progress'), topic=document.getElementById('footerTopic');
+ let index=0;
+ function show(n){
+   index=Math.max(0,Math.min(slides.length-1,n));
+   slides.forEach((s,i)=>{s.classList.toggle('active',i===index);s.setAttribute('aria-hidden',i===index?'false':'true')});
+   prev.disabled=index===0;next.disabled=index===slides.length-1;
+   counter.textContent=(index+1)+' / '+slides.length;
+   progress.style.width=((index+1)/slides.length*100)+'%';
+   topic.textContent=slides[index].dataset.topic||'Mundo SENAI 2026';
+   document.querySelectorAll('.quiz').forEach(q=>{q.querySelectorAll('.option').forEach(b=>{b.classList.remove('correct','wrong');b.disabled=false});let f=q.querySelector('.feedback');if(f)f.textContent=''});
+ }
+ prev.addEventListener('click',()=>show(index-1));next.addEventListener('click',()=>show(index+1));
+ document.addEventListener('keydown',e=>{
+   if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){if(e.target.isContentEditable)return;e.preventDefault();show(index+1)}
+   if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(index-1)}
+   if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);
+ });
+ // Tap/click near screen edges on touch devices to navigate.
+ let startX=null;
+ document.getElementById('deck').addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX},{passive:true});
+ document.getElementById('deck').addEventListener('touchend',e=>{
+   if(startX===null)return;const dx=e.changedTouches[0].clientX-startX;
+   if(Math.abs(dx)>70){show(index+(dx<0?1:-1));startX=null;return}
+   const x=e.changedTouches[0].clientX,w=window.innerWidth;
+   if(x<w*.08)show(index-1);else if(x>w*.92)show(index+1);startX=null;
+ },{passive:true});
+ document.querySelectorAll('.quiz').forEach(q=>{
+   const options=[...q.querySelectorAll('.option')],feedback=q.querySelector('.feedback');
+   options.forEach((btn,i)=>btn.addEventListener('click',()=>{
+     options.forEach((b,j)=>{b.disabled=true;b.classList.toggle('correct',j===Number(q.dataset.answer));b.classList.toggle('wrong',j===i&&j!==Number(q.dataset.answer))});
+     feedback.textContent=(i===Number(q.dataset.answer)?'Correto! ':'Não foi dessa vez. ')+(q.dataset.explain||'');
+   }));
+ });
+ show(0);
+})();
+</script>
+</body>
+</html>
